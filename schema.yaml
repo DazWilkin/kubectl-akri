@@ -1,0 +1,73 @@
+---
+uri: configuration
+schema:
+  type: object
+  items:
+    apiVersion:
+      type: string
+    kind:
+      type: string
+    metadata:
+      $ref: metadata
+    spec:
+      $ref: spec
+---
+uri: container
+schema:
+  type: object
+  items:
+    name:
+      type: string
+    image:
+      type: string
+    resources:
+      $ref: resource
+---
+uri: localObjectReference
+schema:
+  type: object
+  items:
+    name:
+      type: string
+---
+uri: metadata
+schema:
+  type: object
+  items:
+    name:
+      type: string
+---
+uri: podSpec
+schema:
+  type: object
+  items:
+    containers:
+      type: array
+      items:
+        $ref: container
+    imagePullSecrets:
+      type: array
+      items:
+        $ref: localObjectReference
+---
+uri: protocol
+schema:
+  type: hash
+---
+uri: resource
+schema:
+  type: object
+  items:
+    limits:
+      type: hash
+---
+uri: spec
+schema:
+  type: object
+  items:
+    protocol:
+      $ref: protocol
+    capacity:
+      type: integer
+    brokerPodSpec:
+      $ref: podSpec
